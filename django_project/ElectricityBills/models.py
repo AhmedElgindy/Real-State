@@ -9,6 +9,7 @@ class Payment(models.Model):
     image = models.ImageField(upload_to='images/')
     comments = models.TextField()
 
+
     def __str__(self):
         return self.codenumber
 
@@ -35,6 +36,8 @@ class MeterRequest(models.Model):
     tax_num = models.IntegerField()
     Governorate = models.CharField(max_length=10)
     Enterprise = models.CharField(max_length=10)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
@@ -44,6 +47,7 @@ class MeterRequestForm(forms.ModelForm):
     class Meta:
         model = MeterRequest
         fields = '__all__'
+
 
 class PayBills(models.Model):
     number = models.IntegerField()

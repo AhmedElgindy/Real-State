@@ -5,10 +5,49 @@
 <head>
 	<!-- {%block title%}تقديم على عداد غاز{%endblock title%} -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/form6.css' %}">
+	<link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.19/"></script>
+	<style>
+        .location{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+        }
+        .location label{
+            margin-bottom: 10px;
+        }
+        .location #latt{
+            margin-bottom: 10px;
+            color: #1a1a1f;
+            display: block;
+            text-align: left;
+            
+        }
+        .location .lat, .long{
+            display: block;
+            margin-bottom: 10px;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid black;
+            width: 200px;
+        }
+        #mapContainer {
+            height: 400px; /* Adjust the height as needed */
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
 	
-        <div class="container">
+        <div class="container" dir="rtl">
 			
 			<form action="" method="post">
 				{% csrf_token %}
@@ -48,12 +87,25 @@
 					<option value="Warehouse">مستودع</option>
 				  </select>
 				</div>
+				<div class="location" dir="rtl">
+					<div>
+						<label for="id_latitude">Latitude:</label>
+						<input type="hidden" id="id_latitude" name="latitude">
+						<span class="lat">null</span>
+					</div>
+					<div>
+						<label for="id_longitude">Longitude:</label>
+						<input type="hidden" id="id_longitude" name="longitude">
+						<span class="long">null</span>
+					</div>
+					</div>
+				<div id="mapContainer"></div>
 				<button type="submit">تقديم الطلب</button>
 			  </form>
 
 
 		</div>
 		
-
+		<script src="{%static 'js/mapgas.js'%}"></script>
 </body>
 </html>

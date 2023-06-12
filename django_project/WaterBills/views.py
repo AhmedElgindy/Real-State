@@ -15,7 +15,8 @@ def form_nine(request):
         builging_license = request.POST.get(
             "meter-image-3")
         house_measurement = request.POST.get("last-reading-image")
-
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
         # Perform validation
         if not name:
             messages.error(request, 'Please provide a name.')
@@ -33,7 +34,9 @@ def form_nine(request):
                 copy_of_the_ownership_contract=copy_of_the_ownership_contract,
                 district_number=district_number,
                 builging_license=builging_license,
-                house_measurement=house_measurement
+                house_measurement=house_measurement,
+                latitude=latitude,
+                longitude=longitude,
             )
             new_bill.save()
             return render(request, 'WaterBills/form9.html')

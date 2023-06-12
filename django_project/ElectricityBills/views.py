@@ -23,6 +23,7 @@ def provideElectricMeter(request):
                                                            })
 
 
+
 def form2(request):
     if request.method == 'POST':
         form = MeterRequestForm(request.POST, request.FILES)
@@ -30,12 +31,12 @@ def form2(request):
             form.save()
             return render(request, 'ElectricityBills/form2.html')
         else:
+            print(form.errors)
             form = MeterRequestForm()
-        return render(request, 'ElectricityBills/form2.html', {'form': form,
-                                                               })
-    else:
-        form = MeterRequestForm()
-        return render(request, 'ElectricityBills/form2.html')
+            render(request, 'ElectricityBills/form2.html', {'form': form})
+    
+    return render(request, 'ElectricityBills/form2.html', )
+
 
 def form3(request):
     if request.method == 'POST':

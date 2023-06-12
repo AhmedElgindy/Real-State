@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="{%static 'css/style.css'%}">
-    <title>Degital services in real state</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <title>Degital services in real state</title>
 </head>
 
 <body>
@@ -140,7 +140,7 @@
                         <a href="about.html" class="btn">اعرف المزيد</a>
                     </div>
                 </div>
-                <div class="swiper-slide slide" style="background: url({%static 'images/united_states.jpg'%});">
+                <div class="swiper-slide slide" style="background: url('{% static 'images/united_states.jpg' %}');">
                     <div class="content" dir="rtl">
                         <h3> استثمار الرقميات لانجاز طلباتك</h3>
                         <p>جميع خدمات تراخيص البناء حيث يمكنك إتمام جميع العمليات الخاصة باتراخيص البناء من مكانك دون

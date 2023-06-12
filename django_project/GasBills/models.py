@@ -30,6 +30,8 @@ class ProvideGasMeter(models.Model):
        upload_to='images/')
     origin_type = models.CharField(max_length=100, 
     choices=ORIGIN_TYPES_CHOICES,default='اختر من القائمة التالية')
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self): 
         return self.name    
@@ -45,6 +47,7 @@ class NaturalGasReading(models.Model):
     counter_image = models.ImageField(upload_to='images/')
     origin_type = models.CharField(max_length=100, 
     choices=FACILITY_TYPES_CHOICES,default='برجاء تحديد المنشأ')
+  
 
     def __str__(self): 
         return self.name    

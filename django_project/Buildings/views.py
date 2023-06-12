@@ -18,6 +18,8 @@ def form_twelve(request):
         agricultural_approval = request.POST.get("last-reading-image")
         approval_photos = request.POST.get("last-reading-image-3")
         space = request.POST.get("governorate-number-2")
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
 
         # Perform validation
         if not name:
@@ -38,7 +40,9 @@ def form_twelve(request):
                 phone_number=phone_number,
                 agricultural_approval=agricultural_approval,
                 approval_photos=approval_photos,
-                space=space
+                space=space,
+                latitude=latitude,
+                longitude=longitude,
             )
             new_app.save()
             return render(request, 'Buildings/form12.html')
@@ -57,7 +61,7 @@ def form_thirteen(request):
         violation_request_eng = request.POST.get("last-reading-image")
         approval_photos = request.POST.get("last-reading-image-2")
         space = request.POST.get("governorate-number-2")
-
+       
         # Perform validation
         if not name:
             messages.error(request, 'Please provide a name.')
@@ -77,7 +81,8 @@ def form_thirteen(request):
                 phone_number=phone_number,
                 violation_request_eng=violation_request_eng,
                 approval_photos=approval_photos,
-                space=space
+                space=space,
+           
             )
             new_app.save()
             return render(request, 'Buildings/form13.html')

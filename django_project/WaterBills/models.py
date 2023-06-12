@@ -19,6 +19,8 @@ class WaterMeter(models.Model):
     district_number = models.PositiveIntegerField()
     builging_license = models.ImageField(upload_to='images/')
     house_measurement = models.ImageField(upload_to='images/')
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name

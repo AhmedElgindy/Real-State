@@ -15,6 +15,8 @@ def form_six(request):
         receipt_of_approval_from_gas_company = request.POST.get(
             "property-image")
         origin_type = request.POST.get("facility-type")
+        latitude = request.POST.get("latitude")
+        longitude = request.POST.get("longitude")
 
         # Perform validation
         if not name:
@@ -33,7 +35,9 @@ def form_six(request):
                 copy_of_the_ownership_contract=copy_of_the_ownership_contract,
                 photo_of_recent_electricity_receipt=photo_of_recent_electricity_receipt,
                 receipt_of_approval_from_gas_company=receipt_of_approval_from_gas_company,
-                origin_type=origin_type
+                origin_type=origin_type,
+                latitude=latitude,
+                longitude=longitude,
             )
             new_bill.save()
             return render(request, 'GasBills/form6.html')
