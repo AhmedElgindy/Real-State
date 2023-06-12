@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Electrical Services Dashboard</title>
+    <title>Building Services Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/Dashboard/dashbuild1.css' %}">
 </head>
 
@@ -45,8 +45,9 @@
                     <th>Address</th>
                     <th>The number of the agricultural basin to which it belongs</th>
                     <th>Phone</th>
-                    <th>Picture1</th>
-
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Approved</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,23 +59,13 @@
                     <td>{{ building_application.space }}</td>
                     <td>{{ building_application.agricultural_basin_number }}</td>
                     <td>{{ building_application.phone_number }}</td>
+                   
+                    <td>{{ building_application.latitude }}</td>
+                    <td>{{ building_application.longitude }}</td>
                     <td>
-                        <!-- Display Picture1 -->
-                        <img src="{{ building_application.national_identity_card_photo.url }}" alt="Picture1">
+                        <!-- Display Approved status with checkbox -->
+                        <input type="checkbox" {% if building_application.approved %}checked{% endif %}>
                     </td>
-                    <td>
-                        <!-- Display Picture2 -->
-                        <img src="{{ building_application.documents_ownership.url }}" alt="Picture1">
-                    </td>
-                    <td>
-                        <!-- Display Picture3 -->
-                        <img src="{{ building_application.agricultural_approval.url }}" alt="Picture1">
-                    </td>
-                    <td>
-                        <!-- Display Picture4 -->
-                        <img src="{{ building_application.approval_photos.url }}" alt="Picture1">
-                    </td>
-
                 </tr>
                 {% endfor %}
             </tbody>

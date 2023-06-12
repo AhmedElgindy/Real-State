@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Electrical Services Dashboard</title>
+    <title>Building Services Dashboard</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/Dashboard/dashbuild1.css' %}">
 </head>
 
@@ -45,41 +45,28 @@
                     <th>Address</th>
                     <th>The number of the agricultural basin to which it belongs</th>
                     <th>Phone</th>
-                    <th>Picture1</th>
-                    <th>Picture2</th>
-                    <th>Picture3</th>
-                    <th>Picture4</th>
                     <th>Determine the area to be built on in detail</th>
-
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Approved</th>
                 </tr>
             </thead>
             <tbody>
-                {% for collecting_building in collecting_building %}
+                {% for building in collecting_buildings %}
                 <tr>
-                    <td>{{ collecting_building.id }}</td>
-                    <td>{{ collecting_building.name }}</td>
-                    <td>{{ collecting_building.national_identity_card_number }}</td>
-                    <td>{{ collecting_building.space }}</td>
-                    <td>{{ collecting_building.agricultural_basin_number }}</td>
-                    <td>{{ collecting_building.phone_number }}</td>
+                    <td>{{ building.id }}</td>
+                    <td>{{ building.name }}</td>
+                    <td>{{ building.national_identity_card_number }}</td>
+                    <td>{{ building.space }}</td>
+                    <td>{{ building.agricultural_basin_number }}</td>
+                    <td>{{ building.phone_number }}</td>
+                    <td>{{ building.space }}</td>
+                    <td>{{ building.latitude }}</td>
+                    <td>{{ building.longitude }}</td>
                     <td>
-                        <!-- Display Picture1 -->
-                        <img src="{{ collecting_building.national_identity_card_photo.url }}" alt="Picture1">
+                        <!-- Display Approved status with checkbox -->
+                        <input type="checkbox" {% if building.approved %}checked{% endif %}>
                     </td>
-                    <td>
-                        <!-- Display Picture2 -->
-                        <img src="{{ collecting_building.violation_request.url }}" alt="Picture2">
-                    </td>
-                    <td>
-                        <!-- Display Picture3 -->
-                        <img src="{{ collecting_building.violation_request_eng.url }}" alt="Picture3">
-                    </td>
-                    <td>
-                        <!-- Display Picture4 -->
-                        <img src="{{ collecting_building.approval_photos.url }}" alt="Picture4">
-                    </td>
-                    <td>{{ collecting_building.space }}</td>
-
                 </tr>
                 {% endfor %}
             </tbody>
