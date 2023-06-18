@@ -1,5 +1,4 @@
-{%load static%}
-
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,46 +46,45 @@
 </head>
 <body>
 	
-        <div class="container" dir="rtl">
-			
-			<form action="" method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-				<div>
-				  <label for="full-name" >اسم مقدم الطلب :  </label>
-				  <input type="text" id="full-name" name="full-name" required>
-				</div>
-				<div>
-				  <label for="national-id">رقم بطاقة الرقم القومي : </label>
-				  <input type="text" id="national-id" name="national-id" required>
-				</div>
-				<div>
-				  <label for="national-id-image"> صورة بطاقة الرقم القومي :</label>
-				  <input type="file" id="national-id-image" name="national-id-image" required>
-				</div>
-				<div>
-				  <label for="property-contract-image">صورة عقد الملكية :</label>
-				  <input type="file" id="property-contract-image" name="property-contract-image" required>
-				</div>
-				<div>
-				  <label for="electricity-receipt-image">صورة ايصال كهرباء حديث :</label>
-				  <input type="file" id="electricity-receipt-image" name="electricity-receipt-image" required>
-				</div>
-				<div>
-				  <label for="property-image">ايصال موافقة الشركة المصرية القابضة للغاز :</label>
-				  <input type="file" id="property-image" name="property-image" required>
-				</div>
-				<div>
-				  <label for="facility-type">نوع المنشأ:</label>
-				  <select id="facility-type" name="facility-type" required>
+    <div class="container" dir="rtl">
+		<form action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<div>
+				<label for="full-name">اسم مقدم الطلب:</label>
+				<input type="text" id="full-name" name="name" required>
+			</div>
+			<div>
+				<label for="national-id">رقم بطاقة الرقم القومي:</label>
+				<input type="text" id="national-id" name="national_identity_card_number" required>
+			</div>
+			<div>
+				<label for="national-id-image">صورة بطاقة الرقم القومي:</label>
+				<input type="file" id="national-id-image" name="national_identity_card_photo" required>
+			</div>
+			<div>
+				<label for="property-contract-image">صورة عقد الملكية:</label>
+				<input type="file" id="property-contract-image" name="copy_of_the_ownership_contract" required>
+			</div>
+			<div>
+				<label for="electricity-receipt-image">صورة إيصال الكهرباء الحديث:</label>
+				<input type="file" id="electricity-receipt-image" name="photo_of_recent_electricity_receipt" required>
+			</div>
+			<div>
+				<label for="property-image">إيصال موافقة الشركة المصرية القابضة للغاز:</label>
+				<input type="file" id="property-image" name="receipt_of_approval_from_gas_company" required>
+			</div>
+			<div>
+				<label for="facility-type">نوع المنشأ:</label>
+				<select id="facility-type" name="origin_type" required>
 					<option value="">-- برجاء تحديد المنشأ--</option>
 					<option value="Apartment">شقة سكنية</option>
 					<option value="Villa">فيلا</option>
 					<option value="Townhouse">مجمع سكني</option>
-					<option value="Office">مكتب </option>
+					<option value="Office">مكتب</option>
 					<option value="Warehouse">مستودع</option>
-				  </select>
-				</div>
+				</select>
+			</div>
 				<div class="location" dir="rtl">
 					<div>
 						<label for="id_latitude">Latitude:</label>

@@ -47,6 +47,8 @@
                     <th>Picture2</th>
                     <th>Picture3</th>
                     <th>Picture4</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,7 +74,8 @@
                         <!-- Display picture 4 -->
                         <img src="{{ water_meter_entry.house_measurement.url }}" alt="Picture 4">
                     </td>
-                    <td>{{ water_meter_entry.order_status }}</td>
+                    <td>{{ water_meter_entry.latitude }}</td>
+                    <td>{{ water_meter_entry.longitude }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,121 +1,81 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <title>    طلبات تراخيص المباني</title>
-	<link rel="stylesheet" type="text/css" href="css/form12.css">
+    <title>طلبات تراخيص المباني</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/form12.css' %}">
 	<link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.19/"></script>
 	<style>
-        .location{
-            width: 100%;
-            position: relative;
-            display: flex;
-            flex-direction: row;
-			justify-content: space-between;
-            margin-bottom: 5px;
-        }
-		.location .loc{
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
+		.location label {
+			margin-bottom: 10px;
 		}
-		.color .first{
-			display: flex;
-			align-items: center;
-			gap: 1rem;
+		.location #latt {
+			margin-bottom: 10px;
+			color: #1a1a1f;
+			display: block;
+			text-align: left;
 		}
-		.color .first span{
-			width: 30px;
-			height: 30px;
-			background-color: green;
-			border-radius: 50%;
+		.location .lat,
+		.long {
+			display: block;
+			margin-bottom: 10px;
+			background-color: white;
+			padding: 10px;
+			border: 1px solid black;
+			width: 200px;
 		}
-		.color .first:nth-child(2) span{
-			background-color: red;
+		#mapContainer {
+			height: 400px; /* Adjust the height as needed */
+			position: relative;
+			z-index: 1;
+			margin-bottom: 10px;
 		}
-		.color .first:nth-child(3) span{
-			background-color: yellow;
-		}
-		.color .first:nth-child(4) span{
-			background-color: #4a4e69;
-		}
-        .location label{
-            margin-bottom: 10px;
-        }
-        .location #latt{
-            margin-bottom: 10px;
-            color: #1a1a1f;
-            display: block;
-            text-align: left;
-            
-        }
-        .location .lat, .long{
-            display: block;
-            margin-bottom: 10px;
-            background-color: white;
-            padding: 10px;
-            border: 1px solid black;
-            width: 200px;
-        }
-        #mapContainer {
-            height: 400px; /* Adjust the height as needed */
-            position: relative;
-            z-index: 1;
-            margin-bottom: 10px;
-        }
-    </style>
+	</style>
 </head>
 <body>
-	<body>
-		<div class="container" dir="rtl">
-			<h1>تحصيل طلبات الترخيص للمبني</h1>
-			<form action="" method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-		  <div>
-			<label for="name">اسم مقدم الطلب:</label>
-			<input type="text" id="name" name="name" required>
-		  </div>
-		  <div>
-			<label for="national-id">الرقم القومي:</label>
-			<input type="text" id="national-id" name="national-id" required>
-		  </div>
-		  <div>
-			<label for="meter-image"> صورة بطاقة الرقم القومي لمن يصدر الترخيص باسمه : </label>
-			<input type="file" id="meter-image" name="meter-image" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="meter-number">رقم الحوض الزراعي التابع اليه  :</label>
-			<input type="text" id="meter-number" name="meter-number" required>
-		  </div>
-		  <div>
-			<label for="meter-image"> المستندات الدالة بملكية الارض  : </label>
-			<input type="file" id="meter-image" name="meter-image-2" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="governorate-number">رقم تليفون مقدم الطلب :</label>
-			<input type="text" id="governorate-number" name="governorate-number" required>
-		  </div>
-		  <div>
-			<label for="last-reading-image">صورة   الموافقة من الحي الزراعي التابع اليه:</label>
-			<input type="file" id="last-reading-image" name="last-reading-image" accept="image/*" required>
-		  </div>
-
-		  <div>
-			<label for="last-reading-image">    عدد 3 نسخ من موافقة المكتب الهندسي  </label>
-			<input type="file" id="last-reading-image" name="last-reading-image-3" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="governorate-number">تحديد المساحة المراد البناء عليها  بالتفصيل  :     </label>
-			<input type="text" id="governorate-number" name="governorate-number-2" required>
-			
-		  </div>
-
-		  
-		  <div>
+	<div class="container" dir="rtl">
+		<h1>تحصيل طلبات الترخيص للمبني</h1>
+		<form action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<div>
+				<label for="name">اسم مقدم الطلب:</label>
+				<input type="text" id="name" name="name" required>
+			</div>
+			<div>
+				<label for="national-id">الرقم القومي:</label>
+				<input type="text" id="national-id" name="national_identity_card_number" required>
+			</div>
+			<div>
+				<label for="meter-image">صورة بطاقة الرقم القومي لمن يصدر الترخيص باسمه:</label>
+				<input type="file" id="meter-image" name="national_identity_card_photo" accept="image/*" required>
+			</div>
+			<div>
+				<label for="meter-number">رقم الحوض الزراعي التابع اليه:</label>
+				<input type="text" id="meter-number" name="agricultural_basin_number" required>
+			</div>
+			<div>
+				<label for="meter-image">المستندات الدالة بملكية الارض:</label>
+				<input type="file" id="meter-image" name="documents_ownership" accept="image/*" required>
+			</div>
+			<div>
+				<label for="governorate-number">رقم تليفون مقدم الطلب:</label>
+				<input type="text" id="governorate-number" name="phone_number" required>
+			</div>
+			<div>
+				<label for="last-reading-image">صورة الموافقة من الحي الزراعي التابع اليه:</label>
+				<input type="file" id="last-reading-image" name="agricultural_approval" accept="image/*" required>
+			</div>
+			<div>
+				<label for="last-reading-image">عدد 3 نسخ من موافقة المكتب الهندسي:</label>
+				<input type="file" id="last-reading-image" name="approval_photos" accept="image/*" required>
+			</div>
+			<div>
+				<label for="governorate-number">تحديد المساحة المراد البناء عليها بالتفصيل:</label>
+				<input type="text" id="governorate-number" name="space" required>
+			</div>
 			<div class="location" dir="rtl">
 				<div class="loc">
 					<div>
@@ -148,13 +108,11 @@
 					</div>
 				</div>
 			</div>
-				
-				<div id="mapContainer"></div>
+		
+			<div id="mapContainer"></div>
 			<button type="submit">تقديم الطلب</button>
-		  </div>
 		</form>
-
-		</div>
-		<script src="{%static 'js/mapbuild.js'%}"></script>
-	  </body>
-	  </html>
+		<script src="{% static 'js/mapbuild.js' %}"></script>
+	</div>
+</body>
+</html>

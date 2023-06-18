@@ -1,58 +1,67 @@
-{%load static%}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-    <title>    طلبات تصالح المباني</title>
-	<link rel="stylesheet" type="text/css" href="css/form13.css">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/form13.css' %}">
-	<link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+    <meta charset="UTF-8">
+    <title>طلبات تصالح المباني</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form13.css' %}">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.19/"></script>
-	<style>
-        .location{
+    <style>
+        .location {
             width: 100%;
             position: relative;
             display: flex;
             flex-direction: row;
-			justify-content: space-between;
+            justify-content: space-between;
             margin-bottom: 5px;
         }
-		.location .loc{
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-		}
-		.color .first{
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-		}
-		.color .first span{
-			width: 30px;
-			height: 30px;
-			background-color: green;
-			border-radius: 50%;
-		}
-		.color .first:nth-child(2) span{
-			background-color: red;
-		}
-		.color .first:nth-child(3) span{
-			background-color: yellow;
-		}
-		.color .first:nth-child(4) span{
-			background-color: #4a4e69;
-		}
-        .location label{
+
+        .location .loc {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .color .first {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color .first span {
+            width: 30px;
+            height: 30px;
+            background-color: green;
+            border-radius: 50%;
+        }
+
+        .color .first:nth-child(2) span {
+            background-color: red;
+        }
+
+        .color .first:nth-child(3) span {
+            background-color: yellow;
+        }
+
+        .color .first:nth-child(4) span {
+            background-color: #4a4e69;
+        }
+
+        .location label {
             margin-bottom: 10px;
         }
-        .location #latt{
+
+        .location #latt {
             margin-bottom: 10px;
             color: #1a1a1f;
             display: block;
             text-align: left;
-            
         }
-        .location .lat, .long{
+
+        .location .lat,
+        .long {
             display: block;
             margin-bottom: 10px;
             background-color: white;
@@ -60,6 +69,7 @@
             border: 1px solid black;
             width: 200px;
         }
+
         #mapContainer {
             height: 400px; /* Adjust the height as needed */
             position: relative;
@@ -69,98 +79,87 @@
     </style>
 </head>
 <body>
-	<body>
-		<div class="container">
-			<h1>تحصيل طلبات التصالح للمبني</h1>
-		<form action="" method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-		  <div>
-			<label for="name">اسم مقدم الطلب:</label>
-			<input type="text" id="name" name="name" required>
-		  </div>
-		  <div>
-			<label for="national-id">الرقم القومي:</label>
-			<input type="text" id="national-id" name="national-id" required>
-		  </div>
-		  <div>
-			<label for="meter-image"> صورة بطاقة الرقم القومي     : </label>
-			<input type="file" id="meter-image" name="meter-image" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="meter-number">رقم الحوض الزراعي التابع اليه  :</label>
-			<input type="text" id="meter-number" name="meter-number" required>
-		  </div>
-		  <div>
-			<label for="meter-image"> تقديم طلب المخالفة الصادر من الحي الزراعي التابع للمخالفة  : </label>
-			<input type="file" id="meter-image" name="meter-image-2" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="governorate-number">رقم تليفون مقدم الطلب :</label>
-			<input type="text" id="governorate-number" name="governorate-number" required>
-		  </div>
-		  <div>
-			<label for="last-reading-image">صورة المخالفة من المكتب الهندسي  :</label>
-			<input type="file" id="last-reading-image" name="last-reading-image" accept="image/*" required>
-		  </div>
-
-		  <div>
-			<label for="last-reading-image">    عدد 3 نسخ من الموقف الضريبي الصادر المكتب الهندسي  </label>
-			<input type="file" id="last-reading-image" name="last-reading-image-2" accept="image/*" required>
-		  </div>
-		  <div>
-			<label for="governorate-number">تحديد المكان المخالف للبناء   بالتفصيل  :     </label>
-			<input type="text" id="governorate-number" name="governorate-number-2" required>
-			
-		  </div>
-
-		  
-		  <div>
-			<div>
-				<div class="location" dir="rtl">
-					<div class="loc">
-						<div>
-							<label for="id_latitude">Latitude:</label>
-							<input type="hidden" id="id_latitude" name="latitude">
-							<span class="lat">null</span>
-						</div>
-						<div>
-							<label for="id_longitude">Longitude:</label>
-							<input type="hidden" id="id_longitude" name="longitude">
-							<span class="long">null</span>
-						</div>
-					</div>
-					<div class="color">
-						<div class="first">
-							<span></span>
-							<p>Approval</p>
-						</div>
-						<div class="first">
-							<span></span>
-							<p>Refuse</p>
-						</div>
-						<div class="first">
-							<span></span>
-							<p>In Searching</p>
-						</div>
-						<div class="first">
-							<span></span>
-							<p>Urban Space</p>
-						</div>
-					</div>
-				</div>
-
-			
-			<div id="mapContainer"></div>
-
-
-			<button type="submit">تقديم الطلب</button>
-		  </div>
-		</form>
-
-		</div>
-		<script src="{%static 'js/mapbuild.js'%}"></script>
-
-		
-	  </body>
-	  </html>
+    <div class="container">
+        <h1>تحصيل طلبات التصالح للمبني</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <label for="name">اسم مقدم الطلب:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="national-id">الرقم القومي:</label>
+                <input type="text" id="national-id" name="national_identity_card_number" required>
+            </div>
+            <div>
+                <label for="meter-image">صورة بطاقة الرقم القومي:</label>
+                <input type="file" id="meter-image" name="national_identity_card_photo" accept="image/*" required>
+            </div>
+            <div>
+                <label for="meter-number">رقم الحوض الزراعي التابع اليه:</label>
+                <input type="text" id="meter-number" name="agricultural_basin_number" required>
+            </div>
+            <div>
+                <label for="meter-image-2">تقديم طلب المخالفة الصادر من الحي الزراعي التابع للمخالفة:</label>
+                <input type="file" id="meter-image-2" name="violation_request" accept="image/*" required>
+            </div>
+            <div>
+                <label for="governorate-number">رقم تليفون مقدم الطلب:</label>
+                <input type="text" id="governorate-number" name="phone_number" required>
+            </div>
+            <div>
+                <label for="last-reading-image">صورة المخالفة من المكتب الهندسي:</label>
+                <input type="file" id="last-reading-image" name="violation_request_eng" accept="image/*" required>
+            </div>
+            <div>
+                <label for="last-reading-image-2">عدد 3 نسخ من الموقف الضريبي الصادر من المكتب الهندسي:</label>
+                <input type="file" id="last-reading-image-2" name="approval_photos" accept="image/*" required>
+            </div>
+            <div>
+                <label for="governorate-number-2">تحديد المكان المخالف للبناء بالتفصيل:</label>
+                <input type="text" id="governorate-number-2" name="space" required>
+            </div>
+            <div>
+                <div>
+                    <div class="location" dir="rtl">
+                        <div class="loc">
+                            <div>
+                                <label for="id_latitude">Latitude:</label>
+                                <input type="hidden" id="id_latitude" name="latitude">
+                                <span class="lat">null</span>
+                            </div>
+                            <div>
+                                <label for="id_longitude">Longitude:</label>
+                                <input type="hidden" id="id_longitude" name="longitude">
+                                <span class="long">null</span>
+                            </div>
+                        </div>
+                        <div class="color">
+                            <div class="first">
+                                <span></span>
+                                <p>Approval</p>
+                            </div>
+                            <div class="first">
+                                <span></span>
+                                <p>Refuse</p>
+                            </div>
+                            <div class="first">
+                                <span></span>
+                                <p>In Searching</p>
+                            </div>
+                            <div class="first">
+                                <span></span>
+                                <p>Urban Space</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mapContainer"></div>
+                </div>
+            </div>
+            <button type="submit">تقديم الطلب</button>
+        </form>
+    </div>
+    <script src="{% static 'js/mapbuild.js' %}"></script>
+</body>
+</html>

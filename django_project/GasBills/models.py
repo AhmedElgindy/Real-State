@@ -1,21 +1,9 @@
 from django.db import models
-
+from django import forms
 # This Is For Form 6
 
-ORIGIN_TYPES_CHOICES = [
-    ('شقة سكنية','شقة سكنية'),
-    ('فيلا','فيلا'),
-    ('مجمع سكني','مجمع سكني'),
-    ('مكتب','مكتب'),
-    ('مستودع','مستودع'),
-    ('اختر من القائمة التالية','اختر من القائمة التالية')
-]
-FACILITY_TYPES_CHOICES = [
-    ('منزل','منزل'),
-    ('شركة','شركة'),
-    ('منشأة حكومية','منشأة حكومية'),
-    ('برجاء تحديد المنشأ','برجاء تحديد المنشأ')
-]
+
+
 
 class ProvideGasMeter(models.Model):
     name = models.CharField(max_length=300, blank=False, null=False)
@@ -28,14 +16,17 @@ class ProvideGasMeter(models.Model):
        upload_to='images/')
     receipt_of_approval_from_gas_company = models.ImageField(
        upload_to='images/')
-    origin_type = models.CharField(max_length=100, 
-    choices=ORIGIN_TYPES_CHOICES,default='اختر من القائمة التالية')
+    origin_type = models.CharField(max_length=100,)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
     def __str__(self): 
         return self.name    
-    
+
+class ProvideGasMeterForm(forms.ModelForm):
+    class Meta:
+        model = ProvideGasMeter
+        fields = "__all__"
 
 class NaturalGasReading(models.Model):
     name = models.CharField(max_length=300, blank=False, null=False)    
@@ -45,13 +36,16 @@ class NaturalGasReading(models.Model):
     last_reading_date = models.DateField()
     current_reading = models.CharField(max_length=300)
     counter_image = models.ImageField(upload_to='images/')
-    origin_type = models.CharField(max_length=100, 
-    choices=FACILITY_TYPES_CHOICES,default='برجاء تحديد المنشأ')
+    origin_type = models.CharField(max_length=100)
   
 
     def __str__(self): 
         return self.name    
-
+    
+class NaturalGasReadingForm(forms.ModelForm):
+    class Meta:
+        model = NaturalGasReading
+        fields = "__all__"
             
     
 class CollectingGasBills(models.Model):
@@ -68,3 +62,7 @@ class CollectingGasBills(models.Model):
     
     def __str__(self): 
         return self.name  
+class CollectingGasBillsForm(forms.ModelForm):
+    class Meta:
+        model = CollectingGasBills
+        fields = "__all__"

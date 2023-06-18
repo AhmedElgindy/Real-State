@@ -1,15 +1,14 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-    <title>  التقديم علي عداد مياة </title>
-	<link rel="stylesheet" type="text/css" href="css/form9.css">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/form9.css'%}">
-	<link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+    <meta charset="UTF-8">
+    <title>التقديم على عداد مياة</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form9.css' %}">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.19/"></script>
-	<style>
-        .location{
+    <style>
+        .location {
             width: 100%;
             height: 100%;
             position: relative;
@@ -21,17 +20,20 @@
             box-sizing: border-box;
             margin-bottom: 5px;
         }
-        .location label{
+
+        .location label {
             margin-bottom: 10px;
         }
-        .location #latt{
+
+        .location #latt {
             margin-bottom: 10px;
             color: #1a1a1f;
             display: block;
             text-align: left;
-            
         }
-        .location .lat, .long{
+
+        .location .lat,
+        .long {
             display: block;
             margin-bottom: 10px;
             background-color: white;
@@ -39,67 +41,59 @@
             border: 1px solid black;
             width: 200px;
         }
+
         #mapContainer {
-            height: 400px; /* Adjust the height as needed */
+            height: 400px;
+            /* Adjust the height as needed */
             position: relative;
             z-index: 1;
-			margin-bottom: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-	<body>
-		<div class="container" dir="rtl">
-			<h1>  طلبات التقديم علي عداد مياة</h1>
-			<form action="" method="post">
-				{% csrf_token %}
-				{{ form.as_p }}
-		  <div>
-			<label for="name">اسم مقدم الطلب:</label>
-			<input type="text" id="name" name="name" required>
-		  </div>
+    <div class="container" dir="rtl">
+        <h1>طلبات التقديم على عداد مياة</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
 
+            <div>
+                <label for="name">اسم مقدم الطلب:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
 
-		  <div>
-			<label for="national-id">الرقم القومي: </label>
-			<input type="text" id="national-id" name="national-id" required>
-		  </div>
+            <div>
+                <label for="national-id">الرقم القومي:</label>
+                <input type="text" id="national-id" name="national-id" required>
+            </div>
 
+            <div>
+                <label for="meter-image">صورة البطاقة للمواطن:</label>
+                <input type="file" id="meter-image" name="meter-image" accept="image/*" required>
+            </div>
 
-		  <div>
-			<label for="meter-image">صورة البطاقة للمواطن :</label>
-			<input type="file" id="meter-image" name="meter-image" accept="image/*" required>
-		  </div>
+            <div>
+                <label for="meter-image-2">صورة عقد ملكية العقار أو المنشأ:</label>
+                <input type="file" id="meter-image-2" name="meter-image-2" accept="image/*" required>
+            </div>
 
+            <div>
+                <label for="district-number">رقم الحي:</label>
+                <input type="text" id="district-number" name="district-number" required>
+            </div>
 
-		  <div>
-			<label for="meter-image">  صورة عقد ملكية العقار او المنشأ :</label>
-			<input type="file" id="meter-image" name="meter-image-2" accept="image/*" required>
-		  </div>
+            <div>
+                <label for="meter-image-3">صورة أصل ترخيص المبنى:</label>
+                <input type="file" id="meter-image-3" name="meter-image-3" accept="image/*" required>
+            </div>
 
-		<div>
-			<label for="district-number">رقم الحي:</label>
-			<input type="text" id="district-number" name="district-number" required>
+            <div>
+                <label for="last-reading-image">رقم مقايسة المنزل التابع للوحدة المحلية:</label>
+                <input type="file" id="last-reading-image" name="last-reading-image" accept="image/*" required>
+            </div>
 
-		</div>
-
-		<div>
-			<label for="meter-image">صورة  اصل ترخيص المبني  :</label>
-			<input type="file" id="meter-image" name="meter-image-3" accept="image/*" required>
-
-		</div>
-			
-		  
-
-		<div>
-			<label for="last-reading-image">رقم مقايسة المنزل التابع للوحدة المحلية    :</label>
-			<input type="file" id="last-reading-image" name="last-reading-image" accept="image/*" required>
-
-		</div>
-			
-		 <div>
-
-			<div class="location" dir="rtl">
+            <div class="location" dir="rtl">
 				<div>
 					<label for="id_latitude">Latitude:</label>
 					<input type="hidden" id="id_latitude" name="latitude">
@@ -110,18 +104,13 @@
 					<input type="hidden" id="id_longitude" name="longitude">
 					<span class="long">null</span>
 				</div>
-				</div>
-				
-				<div id="mapContainer"></div>
+        </div>
+        
+        <div id="mapContainer"></div>
 
-			<button type="submit">تقديم الطلب </button>
-
-		 </div> 
-			
-		  
-		</form>
-
-		</div>
-		<script src="{%static 'js/mapwater.js'%}"></script>
-	  </body>
-	  </html>
+            <button type="submit">تقديم الطلب</button>
+        </form>
+    </div>
+    <script src="{% static 'js/mapwater.js' %}"></script>
+</body>
+</html>

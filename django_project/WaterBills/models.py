@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 
 FACILITY_TYPES_CHOICES = [
@@ -40,6 +41,12 @@ class WaterMeterReading(models.Model):
 
     def __str__(self):
         return self.name
+    
+class WaterMeterReadingForm(forms.ModelForm):
+    class Meta:
+        model = WaterMeterReading
+        fields = '__all__'
+    
 
 
 class CollectingWaterBills(models.Model):
@@ -56,3 +63,8 @@ class CollectingWaterBills(models.Model):
 
     def __str__(self):
         return self.name
+
+class CollectingWaterBillsForm(forms.ModelForm):
+    class Meta:
+        model = CollectingWaterBills
+        fields = '__all__'

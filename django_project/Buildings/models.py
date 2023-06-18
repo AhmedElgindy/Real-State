@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 
 class BuildingPermitApplications(models.Model):
@@ -17,7 +18,10 @@ class BuildingPermitApplications(models.Model):
     approved = models.BooleanField(null=True)
     def __str__(self):
         return self.name
-
+class BuildingPermitApplicationsForm(forms.ModelForm):
+    class Meta:
+        model = BuildingPermitApplications
+        fields = "__all__"
 
 class CollectingReconciliationBuilding(models.Model):
     name = models.CharField(max_length=300, blank=False, null=False)
@@ -37,3 +41,8 @@ class CollectingReconciliationBuilding(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+class CollectingReconciliationBuildingForm(forms.ModelForm):
+    class Meta:
+        model = CollectingReconciliationBuilding
+        fields = "__all__"

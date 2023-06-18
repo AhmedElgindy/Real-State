@@ -48,6 +48,8 @@
                     <th>Picture 2</th>
                     <th>Picture 3</th>
                     <th>Picture 4</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +76,9 @@
                         <!-- Display Picture 4 -->
                         <img src="{{ provide_gas_meter.receipt_of_approval_from_gas_company.url }}" alt="Picture 4">
                     </td>
+                    <td>{{ provide_gas_meter.latitude }}</td>
+                    <td>{{ provide_gas_meter.longitude }}</td>
+
                 </tr>
                 {% endfor %}
             </tbody>

@@ -94,10 +94,9 @@ def dashbuild1(request):
     return render(request, 'Dashboard/dashbuild1.html', context)
 
 def dashbuild2(request):
-        collecting_building = CollectingReconciliationBuilding.objects.all()
-        context = {'collecting_building': collecting_building}
-        return render(request,'Dashboard/dashbuild2.html',context)
-
+    collecting_buildings = CollectingReconciliationBuilding.objects.all()
+    context = {'collecting_buildings': collecting_buildings}  # Use the correct variable name
+    return render(request, 'Dashboard/dashbuild2.html', context)
 
 
 def superuser_required(view_func):

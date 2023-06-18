@@ -1,3 +1,4 @@
+
 from django.urls import path, include
 from . import views
 urlpatterns = [
@@ -10,4 +11,4 @@ urlpatterns = [
     path('second-model/approved/', views.second_model_approved, name='second_model_approved'),
     path('second-model/not-approved/', views.second_model_not_approved, name='second_model_not_approved'),
     
-]
+] 
