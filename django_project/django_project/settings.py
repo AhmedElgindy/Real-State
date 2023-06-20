@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "room",
     "channels",
     "users",
+    "image",
     # Third party Apps
     "crispy_forms",
     "crispy_bootstrap5",

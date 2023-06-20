@@ -9,4 +9,4 @@ def create_user_room(sender, instance, created, **kwargs):
     if created:
         name = instance.username
         slug = slugify(name)
-        Room.objects.create(name=name, slug=slug)
+        room = Room.objects.create(name=name, slug=slug)
